@@ -7,5 +7,17 @@
 
 import Foundation
 
-print("Hello, World!")
+print("=================================================")
+print("===== Bienvenue dans le super jeu de combat =====")
+print("=================================================")
+print("")
 
+let oGame : Game = Game()
+
+oGame.play()
+print("")
+print("=============================")
+print("=====     GAME OVER    ======")
+print("=============================")
+
+print(oGame.showStatistics())
