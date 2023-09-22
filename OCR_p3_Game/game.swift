@@ -16,9 +16,12 @@ class Game
     
     private var m_aoPlayers : [Player] = []
     
+    //Factory to create the Character by the player choice
     private var m_oMyCharactersFactory = CharacterFactory()
     
-    
+    //called automatically by creating the instance of the Game
+    //Create the players objets for the 2 players choosen with its name
+    //display a resume of the player
     init()
     {
         print("")
@@ -26,19 +29,20 @@ class Game
         print("===========================================")
         print("====== Initialisation de la partie ========")
         print("===========================================")
-        let iNbPlayers = Game.askForAInt(szQuestion: "Combien de joueurs", iMin: 2, iMax: 2)
         
-        for i in 0..<iNbPlayers
+        for i in 0 ..< 2
         {
             let szName = Game.askForAString(question: "Nom du joueur \(i+1) : ")
-            m_aoPlayers.append(Player(name: szName, caracterFactory: m_oMyCharactersFactory))
+            m_aoPlayers.append(Player(name: szName, characterFactory: m_oMyCharactersFactory))
             print("")
             print(m_aoPlayers[i].displayTeam())
             print("")
         }
     }
     
- 
+    //The method is a loop that alternitavely give the hand to each player to play
+    //The loop ends when the game is over (just 1 player left)
+    //for each pass, it delegate to the objet Player the play
     func play()
     {
 
@@ -58,11 +62,12 @@ class Game
 
             print("")
         }
-        while(gameCanContinue())
+        while(!gameIsOver())
         
         
     }
     
+    //Display all the statistics of the game
     func showStatistics() -> String
     {
         var szReturn: String = "Voici les statisques du jeu au \(m_iNumberOfLoops)" + (m_iNumberOfLoops == 1 ? "er" : "eme") + " tour :\n"
@@ -71,6 +76,10 @@ class Game
         {
             if(player.isAlive())
             {
+                if(gameIsOver())
+                {
+                    print("\(player.getPlayerName()) a gagné")
+                }
                 szReturn += player.displayTeam()
             }
             else
@@ -79,7 +88,7 @@ class Game
             }
         }
         
-        if(!gameCanContinue())
+        if(gameIsOver())
         {
             szReturn += "Game is OVER"
         }
@@ -87,10 +96,6 @@ class Game
         return szReturn
     }
     
-    private func showGameState() -> String
-    {
-        return "No State"
-    }
     
     //function to ask a question and get for an Int value beetween iMin included and iMax included
     // if not correct, the function ask the same question again
@@ -137,7 +142,7 @@ class Game
     
     
     //Return true if minimum 2 players still alive
-    private func gameCanContinue() -> Bool
+    private func gameIsOver() -> Bool
     {
         var iPlayersAliveCount: Int = 0
         
@@ -150,7 +155,7 @@ class Game
             }
         }
         
-        return (iPlayersAliveCount > 1)
+        return (iPlayersAliveCount <= 1)
     }
 
 }

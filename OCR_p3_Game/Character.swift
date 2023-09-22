@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// This classe is the base classe for all the characters
 class Character
 {
     private let m_szName : String
@@ -20,37 +21,52 @@ class Character
         m_oWeapon = nil
     }
     
+    /// Gives the name used to create tje Character
+    /// - Returns: Character name
     func getName() -> String
     {
         return m_szName
     }
     
+    /// Return the type of the character. Each subclasse override the function to return the correct type
+    /// - Returns: type name of the character
     func getTypeName() -> String
     {
         return "Unknown"
     }
     
+    /// return true if the character still have some life points
+    /// - Returns: true if the character is alive
     func isAlive() -> Bool
     {
         return m_iLifePoints>0
     }
     
+    /// gives the number of life points the the character can take out the opponent
+    /// - Returns: number of life points to reduce to the opponet
     func getDamage() -> Int
     {
         return (m_oWeapon != nil ? m_oWeapon!.getDamage() : 0)
     }
     
+    /// gives the current life points that the character has
+    /// - Returns: value of the current life points
     func getLifePoints() -> Int
     {
         return m_iLifePoints
     }
     
+    /// return the life points that the character can add to one team character
+    /// - Returns: value of life points to add to the team collegue
     func getCarePoints() -> Int
     {
         return m_iCarePoints
     }
     
     
+    /// when the present character attack the opponent. it reduces his life points with the damage points
+    /// - Parameter oOpponent: the character to attack
+    /// - Returns: return true if the opponent was alive
     func fightAgainst(opponent oOpponent : Character) -> Bool
     {
         var bReturn : Bool = false
@@ -76,6 +92,9 @@ class Character
         return bReturn
     }
     
+    /// Use this function to cure one of your team collegue. It adds the cure points to the life points of your team collegue
+    /// - Parameter oCharToCure: character to cure
+    /// - Returns: return true if the character to cure was alive
     func cure(teammate oCharToCure : Character) -> Bool
     {
         var bReturn : Bool = false
@@ -83,22 +102,26 @@ class Character
         if(oCharToCure.isAlive())
         {
             oCharToCure.m_iLifePoints += getCarePoints()
-            print("\(oCharToCure.getName()) vous remercie, il va mieux avec \(oCharToCure.getLifePoints()) points de vie")
+            print("\(oCharToCure.getName()) te remercie, il va mieux avec \(oCharToCure.getLifePoints()) points de vie")
             bReturn = true
         }
         else
         {
-            print("Impossible de ranimer \(oCharToCure.getName()), tu n'as pas les pouvoirs pour le ramener à la vie")
+            print("Impossible de réanimer \(oCharToCure.getName()), tu n'as pas les pouvoirs pour le ramener à la vie")
         }
         
         return bReturn
     }
     
+    /// return true if the character has a weapon
+    /// - Returns: true if weapon
     func hasWeapon() -> Bool
     {
         return m_oWeapon != nil
     }
     
+    /// returns the weapon name
+    /// - Returns: weapon name, can be nil if the character has no weapon
     func getWeaponName() -> String?
     {
         if let oWeapon = m_oWeapon
@@ -111,6 +134,8 @@ class Character
         }
     }
     
+    /// returns a string that concatains all the information abour the character
+    /// - Returns: character information resumed
     func toString() -> String
     {
         var szReturn: String
@@ -118,7 +143,7 @@ class Character
         szReturn = "\(getName())(\(getTypeName()))"
         if(isAlive())
         {
-            szReturn += " [PV=\(getLifePoints()) - Care=\(getCarePoints()) - Domage=\(getDamage())"
+            szReturn += "\t[PV=\(getLifePoints()) - Care=\(getCarePoints()) - Domage=\(getDamage())"
             if let szWeaponName = getWeaponName()
             {
                 szReturn += "(\(szWeaponName))"
@@ -127,7 +152,7 @@ class Character
         }
         else
         {
-            szReturn += " [Mort pour l'équipe]"
+            szReturn += "\t[Mort pour l'équipe]"
         }
         
         return szReturn

@@ -7,11 +7,13 @@
 
 import Foundation
 
-
+//Factory to create the characters by type selected by the user
 class CharacterFactory
 {
+    //to avoid double in character names
     var m_aoCharacterNames : [String] = []
     
+    //emum to be completed in case of new Characters. Use to do a good switch case for creation
     public enum CharacterType : String, CaseIterable
     {
         case Dwarf = "Sa hache vous infligera beaucoup de dégats, mais il n'a pas beaucoup de points de vie"
@@ -19,16 +21,18 @@ class CharacterFactory
         case Warrior = "L'attaquant classique. Un bon guerrier !"
     }
     
+    //just to display the list of characters available
     init()
     {
         print("voici la liste de type de personnages que vous pouvez créer :")
-        for type in CharacterType.allCases
-        {
-            print("\t\(type)\t : \(type.rawValue)")
-        }
+        print(CharacterType.allCases.reduce(""){$0 + "\t\($1)\t : \($1.rawValue)\n"})
+//        for type in CharacterType.allCases
+//        {
+//            print("\t\(type)\t : \(type.rawValue)")
+//        }
     }
     
-    
+    //Create the character depending the character type choose by the user
     public func createCharacter(type oCarType : CharacterFactory.CharacterType, name szName : String) -> Character?
     {
         var oReturn : Character?
@@ -50,7 +54,7 @@ class CharacterFactory
         return oReturn
     }
     
-    
+    //just to check if the Character name is not used before
     public func isValidCharacterName(name szName : String) -> Bool
     {
         return !m_aoCharacterNames.contains(szName)
