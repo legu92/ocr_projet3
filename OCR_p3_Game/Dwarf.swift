@@ -12,17 +12,13 @@ class Dwarf : Character
 {
 
     
+    /// Use a specific profil for the character
+    /// - Parameter szName: name given to the character
     override init(name szName: String)
     {
         super.init(name: szName)
-        m_oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Dwarf)
-        m_iLifePoints = 20
-        m_iCarePoints = 0
+        self.oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Dwarf)
+        self.iLifePoints = 20
+        self.iCarePoints = 0
     }
-    
-    override func getTypeName() -> String
-    {
-        return "Dwarf"
-    }
-    
 }

@@ -10,27 +10,27 @@ import Foundation
 
 class Weapon
 {
-    internal var m_iDamage : Int
-    internal var m_szTypeName : String
+    internal var iDamage : Int
+    internal var szTypeName : String
     
     init()
     {
-        m_iDamage = 0
-        m_szTypeName = "arme"
+        self.iDamage = 0
+        self.szTypeName = "arme"
     }
     
     /// give de damage that the character can apply to its opponent
     /// - Returns: point that must be reduce on the life points of the opponent
     func getDamage()-> Int
     {
-        return m_iDamage
+        return self.iDamage
     }
     
     /// Get the name of the type of the character
     /// - Returns: name of the type
     func getTypeName() -> String
     {
-        return m_szTypeName
+        return self.szTypeName
     }
     
     /// Static function that have to be called to create the weapon that matchs to the character passed in argument

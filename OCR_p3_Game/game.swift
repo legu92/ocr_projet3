@@ -12,16 +12,17 @@ import Foundation
 
 class Game
 {
-    private var m_iNumberOfLoops: Int = 0 //count the number of loops for statistics at the end
+    private var iNumberOfLoops: Int = 0 //count the number of loops for statistics at the end
     
-    private var m_aoPlayers : [Player] = []
+    private var aoPlayers : [Player] = [] //Players to play the game
     
     //Factory to create the Character by the player choice
-    private var m_oMyCharactersFactory = CharacterFactory()
+    private var oMyCharactersFactory = CharacterFactory()
     
-    //called automatically by creating the instance of the Game
-    //Create the players objets for the 2 players choosen with its name
-    //display a resume of the player
+
+    /// called automatically by creating the instance of the Game
+    ///Create the players objets for the 2 players choosen with its name
+    ///display a resume of the player
     init()
     {
         print("")
@@ -33,16 +34,17 @@ class Game
         for i in 0 ..< 2
         {
             let szName = Game.askForAString(question: "Nom du joueur \(i+1) : ")
-            m_aoPlayers.append(Player(name: szName, characterFactory: m_oMyCharactersFactory))
+            self.aoPlayers.append(Player(name: szName, characterFactory: self.oMyCharactersFactory))
             print("")
-            print(m_aoPlayers[i].displayTeam())
+            print(self.aoPlayers[i].displayTeam())
             print("")
         }
     }
     
-    //The method is a loop that alternitavely give the hand to each player to play
-    //The loop ends when the game is over (just 1 player left)
-    //for each pass, it delegate to the objet Player the play
+
+    ///The method is a loop that alternitavely give the hand to each player to play
+    ///The loop ends when the game is over (just 1 player left)
+    ///for each pass, it delegates to the objet Player the turn
     func play()
     {
 
@@ -54,11 +56,11 @@ class Game
         print("")
         repeat
         {
-            m_iNumberOfLoops += 1
+            self.iNumberOfLoops += 1
             print("")
-            print("----  \(m_iNumberOfLoops)", terminator: "")
-            print( (m_iNumberOfLoops == 1 ? "er" : "eme") + " tour  -----")
-            m_aoPlayers[m_iNumberOfLoops%2].playTrickAginst(opponent: m_aoPlayers[(m_iNumberOfLoops+1)%2])
+            print("----  \(self.iNumberOfLoops)", terminator: "")
+            print( (self.iNumberOfLoops == 1 ? "er" : "eme") + " tour  -----")
+            self.aoPlayers[self.iNumberOfLoops%2].playTrickAginst(opponent: self.aoPlayers[(self.iNumberOfLoops+1)%2])
 
             print("")
         }
@@ -67,12 +69,14 @@ class Game
         
     }
     
-    //Display all the statistics of the game
+    /// Display all the statistics of the game
+    /// - Returns: A string to display the all statistics
     func showStatistics() -> String
     {
-        var szReturn: String = "Voici les statisques du jeu au \(m_iNumberOfLoops)" + (m_iNumberOfLoops == 1 ? "er" : "eme") + " tour :\n"
+        var szReturn: String = "Voici les statisques du jeu au \(self.iNumberOfLoops)" + (self.iNumberOfLoops == 1 ? "er" : "eme") + " tour :\n"
         
-        for player in m_aoPlayers
+        //a loop on each player
+        for player in self.aoPlayers
         {
             if(player.isAlive())
             {
@@ -97,8 +101,13 @@ class Game
     }
     
     
-    //function to ask a question and get for an Int value beetween iMin included and iMax included
-    // if not correct, the function ask the same question again
+    ///function to ask a question and get for an Int value beetween iMin included and iMax included
+    /// if not correct, the function ask the same question again
+    /// - Parameters:
+    ///   - szQuestion: string that represent the question to ask
+    ///   - iMin: min value accepted in the response (included)
+    ///   - iMax: max value accepted in the response (included)
+    /// - Returns: the value of the answer
     static func askForAInt(szQuestion : String, iMin: Int, iMax: Int) -> Int
     {
         var iReturn = Int.max
@@ -115,15 +124,23 @@ class Game
                     if(iResponse >= iMin && iResponse <= iMax)
                     {
                        iReturn = iResponse
-                   }
+                    }
+                    else
+                    {
+                        print("valeur incorrecte, elle doit être entre \(iMin) et \(iMax)) : ",terminator: "")
+                    }
                 }
             }
         }
         
+        
         return iReturn
     }
-    
-    //function to ask a question and get response as a String
+                              
+    ///function to ask a question and get for an string value not empty for the answer
+    /// - Parameters:
+    ///   - szQuestion: string that represent the question to ask
+    /// - Returns: the value of the answer
     static func askForAString(question szQuestion : String) -> String
     {
         var szReturn: String = ""
@@ -142,12 +159,16 @@ class Game
     
     
     //Return true if minimum 2 players still alive
+                              
+   ///Return true if minimum 2 players still alive
+   /// - Returns: boolean
+
     private func gameIsOver() -> Bool
     {
         var iPlayersAliveCount: Int = 0
         
         
-        for player in m_aoPlayers
+        for player in self.aoPlayers
         {
             if(player.isAlive())
             {

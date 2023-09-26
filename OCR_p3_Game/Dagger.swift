@@ -13,7 +13,7 @@ class Dagger : Weapon
     override init()
     {
         super.init()
-        m_iDamage = 5
-        m_szTypeName = "poignard"
+        self.iDamage = 5
+        self.szTypeName = "poignard"
     }
 }

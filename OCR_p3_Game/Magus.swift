@@ -14,13 +14,8 @@ class Magus : Character
     override init(name szName: String)
     {
         super.init(name: szName)
-        m_oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Magus)
-        m_iLifePoints = 10
-        m_iCarePoints = 50
-    }
-
-    override func getTypeName() -> String
-    {
-        return "Magus"
+        self.oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Magus)
+        self.iLifePoints = 10
+        self.iCarePoints = 50
     }
 }

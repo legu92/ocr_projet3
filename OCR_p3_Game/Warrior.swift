@@ -13,13 +13,8 @@ class Warrior : Character
     override init(name szName: String)
     {
         super.init(name: szName)
-        m_oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Warrior)
-        m_iLifePoints = 50
-        m_iCarePoints = 0
-    }
-    
-    override func getTypeName() -> String
-    {
-        return "Warrior"
+        self.oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Warrior)
+        self.iLifePoints = 50
+        self.iCarePoints = 0
     }
 }

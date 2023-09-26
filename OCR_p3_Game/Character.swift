@@ -10,57 +10,59 @@ import Foundation
 /// This classe is the base classe for all the characters
 class Character
 {
-    private let m_szName : String
-    internal var m_iLifePoints : Int = 0
-    internal var m_iCarePoints: Int = 0
-    internal var m_oWeapon : Weapon?
+    private let szName : String
+    internal var iLifePoints : Int = 0
+    internal var iCarePoints: Int = 0
+    internal var oWeapon : Weapon?
     
+    /// Initialisation of the object
+    /// - Parameter szName: name to give to the Character
     init(name szName: String)
     {
-        m_szName = szName
-        m_oWeapon = nil
+        self.szName = szName
+        self.oWeapon = nil
     }
     
     /// Gives the name used to create tje Character
     /// - Returns: Character name
     func getName() -> String
     {
-        return m_szName
+        return self.szName
     }
     
     /// Return the type of the character. Each subclasse override the function to return the correct type
     /// - Returns: type name of the character
     func getTypeName() -> String
     {
-        return "Unknown"
+        return String(describing: type(of: self))
     }
     
     /// return true if the character still have some life points
     /// - Returns: true if the character is alive
     func isAlive() -> Bool
     {
-        return m_iLifePoints>0
+        return self.iLifePoints>0
     }
     
     /// gives the number of life points the the character can take out the opponent
     /// - Returns: number of life points to reduce to the opponet
     func getDamage() -> Int
     {
-        return (m_oWeapon != nil ? m_oWeapon!.getDamage() : 0)
+        return (self.oWeapon != nil ? self.oWeapon!.getDamage() : 0)
     }
     
     /// gives the current life points that the character has
     /// - Returns: value of the current life points
     func getLifePoints() -> Int
     {
-        return m_iLifePoints
+        return self.iLifePoints
     }
     
     /// return the life points that the character can add to one team character
     /// - Returns: value of life points to add to the team collegue
     func getCarePoints() -> Int
     {
-        return m_iCarePoints
+        return self.iCarePoints
     }
     
     
@@ -73,7 +75,7 @@ class Character
         
         if(oOpponent.isAlive())
         {
-            oOpponent.m_iLifePoints -= getDamage()
+            oOpponent.iLifePoints -= getDamage()
             if(!oOpponent.isAlive())
             {
                 print("Le personnage \(oOpponent.getName()) est maintenant mort, paix à son âme...")
@@ -101,7 +103,7 @@ class Character
         
         if(oCharToCure.isAlive())
         {
-            oCharToCure.m_iLifePoints += getCarePoints()
+            oCharToCure.iLifePoints += getCarePoints()
             print("\(oCharToCure.getName()) te remercie, il va mieux avec \(oCharToCure.getLifePoints()) points de vie")
             bReturn = true
         }
@@ -117,16 +119,16 @@ class Character
     /// - Returns: true if weapon
     func hasWeapon() -> Bool
     {
-        return m_oWeapon != nil
+        return self.oWeapon != nil
     }
     
     /// returns the weapon name
     /// - Returns: weapon name, can be nil if the character has no weapon
     func getWeaponName() -> String?
     {
-        if let oWeapon = m_oWeapon
+        if let oWeaponTmp = self.oWeapon
         {
-            return oWeapon.getTypeName()
+            return oWeaponTmp.getTypeName()
         }
         else
         {

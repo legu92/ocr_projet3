@@ -13,8 +13,7 @@ class Chopped : Weapon
     override init()
     {
         super.init()
-        m_iDamage = 50
-        m_szTypeName = "hache"
+        self.iDamage = 50
+        self.szTypeName = "hache"
     }
-
 }
