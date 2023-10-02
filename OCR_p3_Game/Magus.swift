@@ -16,6 +16,6 @@ class Magus : Character
         super.init(name: szName)
         self.oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Magus)
         self.iLifePoints = 10
-        self.iCarePoints = 50
+        self.iCarePoints = 20
     }
 }

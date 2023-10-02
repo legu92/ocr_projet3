@@ -48,7 +48,11 @@ class Character
     /// - Returns: number of life points to reduce to the opponet
     func getDamage() -> Int
     {
-        return (self.oWeapon != nil ? self.oWeapon!.getDamage() : 0)
+        guard let oRealWeapon = self.oWeapon else
+        {
+            return 0
+        }
+        return oRealWeapon.getDamage()
     }
     
     /// gives the current life points that the character has

@@ -14,7 +14,7 @@ class Warrior : Character
     {
         super.init(name: szName)
         self.oWeapon = Weapon.createWeapon(type: CharacterFactory.CharacterType.Warrior)
-        self.iLifePoints = 50
+        self.iLifePoints = 30
         self.iCarePoints = 0
     }
 }

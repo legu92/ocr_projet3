@@ -13,7 +13,7 @@ class Sword : Weapon
     override init()
     {
         super.init()
-        self.iDamage = 10
+        self.iDamage = 30
         self.szTypeName = "épée"
     }
 }

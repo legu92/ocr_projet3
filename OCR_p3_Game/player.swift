@@ -20,7 +20,6 @@ class Player
         var szCharacterName : String
         var szQuestion : String
         var szQuestionType : String = "Merci de choisir un type de personnage : \n"
-        var iLoop : Int = 1
         
         m_szName = szName
         

@@ -66,7 +66,7 @@ class CharacterFactory
     /// - Returns: true if this name can be used
     public func isValidCharacterName(name szName : String) -> Bool
     {
-        return (self.aoCharacters.filter{$0.getName() == szName}).isEmpty
+        return (self.aoCharacters.filter{$0.getName().uppercased() == szName.uppercased()}).isEmpty
 
     }
     
