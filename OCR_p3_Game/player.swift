@@ -25,11 +25,6 @@ class Player
         
         szQuestionType += CharacterFactory.CharacterType.allCases.enumerated().reduce(""){$0 + "\t[\($1.offset+1)]\t\($1.element) \n"}
         
-        //        for type in CharacterFactory.CharacterType.allCases
-        //        {
-        //            szQuestionType += "[\(iLoop)] \(type)   "
-        //            iLoop += 1
-        //        }
         
         //loop to create 3 characters
         for _ in 0...2
@@ -67,10 +62,6 @@ class Player
         var szReturn : String
         
         szReturn = self.aoCharacters.reduce("Team \(getPlayerName()) :\n"){$0 + "\t\($1.toString())\n"}
-//        for i in 0...2
-//        {
-//            szReturn += m_aoCharacters[i].toString() + "\n"
-//        }
         
         return szReturn
     }
@@ -134,13 +125,6 @@ class Player
    
         //select only the character alive
         aoPossibleCharacter = self.aoCharacters.filter{$0.isAlive()}
-//        for oCaracter in m_aoCharacters
-//        {
-//            if(oCaracter.isAlive())
-//            {
-//                aoPossibleCharacter.append(oCaracter)
-//            }
-//        }
        
         if(aoPossibleCharacter.count > 1)
         {
@@ -149,11 +133,6 @@ class Player
                 
                 $0 + "\t[\($1.offset+1)]\t\($1.element.toString())\n"
             }
-            //        for i in 1...aoPossibleCharacter.count
-            //        {
-            //            szQuestion += "   [\(i)] \(aoPossibleCharacter[i-1].toString())\n"
-            //        }
-            //        szQuestion += "Quel personnage choisissez-vous ? "
             
             let iResponse = Game.askForAInt(szQuestion: szQuestion, iMin: 1, iMax: aoPossibleCharacter.count)
             

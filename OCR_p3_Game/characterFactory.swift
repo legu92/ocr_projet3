@@ -26,10 +26,6 @@ class CharacterFactory
     {
         print("voici la liste de type de personnages que vous pouvez créer :")
         print(CharacterType.allCases.reduce(""){$0 + "\t\($1)\t : \($1.rawValue)\n"})
-//        for type in CharacterType.allCases
-//        {
-//            print("\t\(type)\t : \(type.rawValue)")
-//        }
     }
     
     ///Create the character depending the character type choose by the user
